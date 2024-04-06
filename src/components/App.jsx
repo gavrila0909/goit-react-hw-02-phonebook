@@ -6,16 +6,23 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      contacts: [],
+      contacts: [
+        { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
+        { id: 'id-2', name: 'Hermione Kline', number: '443-89-12' },
+        { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
+        { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
+      ],
+      filter: '',
       name: '',
       number: '',
     };
   }
+
   handleAddContacts = e => {
     e.preventDefault();
-    const {name, number} = this.state;
+    const { name, number } = this.state;
     //fac verificare daca inputul nu este gol
-    if (name.trim() !== '' && number.trim() !== '')  {
+    if (name.trim() !== '' && number.trim() !== '') {
       const newContact = {
         id: nanoid(),
         name: name,
@@ -33,11 +40,14 @@ class App extends Component {
 
   handleInputChange = event => {
     const inputName = event.target.name;
-    const inputValue = event.target.value
-    this.setState ({[inputName]: inputValue})
-  }
+    const inputValue = event.target.value;
+    this.setState({ [inputName]: inputValue });
+  };
 
- 
+  handleSearch = event => {
+    const searchValue = event.target.value;
+    this.setState({ filter: searchValue });
+  };
 
   render() {
     console.log('Ma randez...'); //sa vad cum functioneaza randarea
@@ -58,7 +68,7 @@ class App extends Component {
           <label htmlFor="number">Number:</label>
           <input
             type="tel"
-            id='number'
+            id="number"
             name="number"
             value={this.state.number}
             onChange={this.handleInputChange}
@@ -70,10 +80,27 @@ class App extends Component {
             Add contact
           </button>
           <h2>Contacts</h2>
+          <p>Find contacts by name</p>
+          <input
+            type="text"
+            name="search"
+            onChange={this.handleSearch}
+          />
           <ul>
-            {this.state.contacts.map(contact => (
-              <li key={contact.id}>{contact.name}: {contact.number}</li>
-            ))}
+            {this.state.contacts
+              .filter(contact => {
+                return (
+                  this.state.filter.toLowerCase() === '' ||
+                  contact.name
+                    .toLowerCase()
+                    .includes(this.state.filter.toLowerCase())
+                );
+              })
+              .map(contact => (
+                <li key={contact.id}>
+                  {contact.name}: {contact.number}
+                </li>
+              ))}
           </ul>
         </form>
       </>

@@ -2,11 +2,14 @@
     display: flex;
     flex-direction: column;
     margin: 60px auto;
-    width: 200px;
+    width: 300px;
     gap: 10px;
     justify-content: center;
     align-items:flex-start;
 }
 .formContainer button {
     width: 100px;
+}
+.formContainer input {
+    border-color: red;
 }
