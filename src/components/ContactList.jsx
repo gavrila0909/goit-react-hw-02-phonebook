@@ -1,6 +1,15 @@
 import React, { Component } from 'react';
+import styles from './ContactList.module.css';
 
 class ContactList extends Component {
+  handleDelete = deletingContact => {
+    //alert(deletingContact.name);
+    const newContacts = this.props.contacts.filter(
+      contact => contact.id !== deletingContact.id
+    );
+    this.props.onDelete(newContacts); // Trimit noile contacte către părinte pentru a le actualiza
+  };
+
   render() {
     return (
       <>
@@ -11,7 +20,7 @@ class ContactList extends Component {
           onChange={e => this.props.onSearch(e.target.value)}
         />
 
-        <ul>
+        <ul className={styles.listContainer}>
           {this.props.contacts
             .filter(contact => {
               return (
@@ -24,6 +33,9 @@ class ContactList extends Component {
             .map(contact => (
               <li key={contact.id}>
                 {contact.name}: {contact.number}
+                <button onClick={() => this.handleDelete(contact)}>
+                  Delete
+                </button>
               </li>
             ))}
         </ul>

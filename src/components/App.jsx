@@ -28,7 +28,7 @@ class App extends Component {
       };
 
       this.setState(prevState => ({
-        //actualizeaza starea componentei contacts
+        //actualizez starea componentei contacts
         contacts: [...prevState.contacts, newContact],
       }));
     } else {
@@ -38,6 +38,10 @@ class App extends Component {
 
   handleSearch = filter => {
     this.setState({ filter: filter });
+  };
+
+  handleDelete = newContacts => {
+    this.setState({ contacts: newContacts });
   };
 
   render() {
@@ -53,6 +57,7 @@ class App extends Component {
             contacts={this.state.contacts}
             filter={this.state.filter}
             onSearch={this.handleSearch}
+            onDelete={this.handleDelete}
           />
         </div>
       </>
