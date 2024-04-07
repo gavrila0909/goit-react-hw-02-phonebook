@@ -1,15 +1,8 @@
-.formContainer {
+.mainContainer {
     display: flex;
     flex-direction: column;
     margin: 60px auto;
-    width: 300px;
-    gap: 10px;
+    align-items: center;
     justify-content: center;
-    align-items:flex-start;
-}
-.formContainer button {
-    width: 100px;
-}
-.formContainer input {
-    border-color: red;
+
 }
