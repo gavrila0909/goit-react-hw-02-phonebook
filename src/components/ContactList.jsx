@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import styles from './ContactList.module.css';
+import PropTypes from 'prop-types';
 
 class ContactList extends Component {
   handleDelete = deletingContact => {
@@ -43,4 +44,16 @@ class ContactList extends Component {
     );
   }
 }
+
+ContactList.propTypes = {
+  onSearch: PropTypes.func.isRequired,
+  onDelete: PropTypes.func.isRequired,
+  contacts: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+      number: PropTypes.string.isRequired
+    })
+  ).isRequired
+};
 export default ContactList;
