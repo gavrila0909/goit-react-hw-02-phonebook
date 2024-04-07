@@ -18,16 +18,22 @@ class App extends Component {
     };
   }
   handleAddContact = (name, number) => {
-    const newContact = {
-      id: nanoid(),
-      name: name,
-      number: number,
-    };
+    const { contacts } = this.state;
+    const existingContact = contacts.find(contact => contact.name === name);
+    if (!existingContact) {
+      const newContact = {
+        id: nanoid(),
+        name: name,
+        number: number,
+      };
 
-    this.setState(prevState => ({
-      //actualizeaza starea componentei contacts
-      contacts: [...prevState.contacts, newContact],
-    }));
+      this.setState(prevState => ({
+        //actualizeaza starea componentei contacts
+        contacts: [...prevState.contacts, newContact],
+      }));
+    } else {
+      alert(`${name} already exist in the list`);
+    }
   };
 
   handleSearch = filter => {

@@ -24,7 +24,7 @@ class ContactForm extends Component {
     const inputValue = event.target.value;
     this.setState({ [inputName]: inputValue });
   };
-  
+
   render() {
     return (
       <form className={styles.formContainer} onSubmit={this.handleSubmit}>
